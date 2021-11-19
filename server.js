@@ -1,6 +1,7 @@
 const app = require('express')();
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
+
 //Connect the DB
 
 mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});

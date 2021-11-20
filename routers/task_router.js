@@ -3,6 +3,7 @@ const router = express.Router();
 const Task = require('../models/task_model.js');
 
 //get all tasks
+
 router.get('/', (req, res) => {
     Task.find(function(err, tasks) {
         if(err) {

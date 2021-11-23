@@ -15,6 +15,10 @@ const UserSchema = new Schema ({
         required: true,
         max: 10
     },
+    user_name: {
+        type: String,
+        required: true
+    },
     pass: {
         type: String,
         required: true    

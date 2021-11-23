@@ -25,11 +25,11 @@ const UserSchema = new Schema ({
     },
     emp: {
         type: Boolean,
-        required: true
+        default: false
     },
     admin: {
         type: Boolean,
-        required: true
+        default: false
     }
 });
 

@@ -36,4 +36,4 @@ const EmpSchema = new Schema({
 const Emp = mongoose.model('Empolyee',EmpSchema);
 
 // export the model
-model.exports = Emp;
+module.exports = Emp;

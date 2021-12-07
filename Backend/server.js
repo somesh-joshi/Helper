@@ -4,16 +4,10 @@ const cors = require('cors');
 
 //Connect the DB
 
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
-mongoose.connect.on('connected', () => {
-    console.log("Connected to DB");
-});
-mongoose.connection.on('error', (err) => {
-    console.log('Database error: ' + err);
-});
-mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/test')
+  .then(() => console.log('connection successful'))
+  .catch((err) => console.error(err));
 
-//
 
 var allowlist = ['http://example1.com', 'http://example2.com']
 var corsOptionsDelegate = function (req, callback) {
@@ -28,8 +22,9 @@ var corsOptionsDelegate = function (req, callback) {
 
 app.use(cors(corsOptionsDelegate));
 
-app.use('/productapi',require('./routes/product_routes.js'));
-app.use('/cartapi',require('./routes/cart_routes.js'));
+app.use('/employees', require('./routers/emp_router'));
+app.use('/users', require('./routers/user_router'));
+app.use('/task', require('./routers/task_router'));
 
 // error handling middleware
 app.use((err, req, res, next) => {

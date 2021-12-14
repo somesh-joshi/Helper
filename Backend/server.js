@@ -1,15 +1,16 @@
 const app = require('express')();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 //Connect the DB
 
-mongoose.connect('mongodb://localhost/test')
+mongoose.connect('mongodb://localhost/helper', { useNewUrlParser: true })
   .then(() => console.log('connection successful'))
   .catch((err) => console.error(err));
 
 
-var allowlist = ['http://example1.com', 'http://example2.com']
+var allowlist = ['http://example1.com', 'http://example2.com', 'http://localhost:3000'];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
@@ -21,7 +22,7 @@ var corsOptionsDelegate = function (req, callback) {
 }
 
 app.use(cors(corsOptionsDelegate));
-
+app.use(bodyParser.json());
 app.use('/employees', require('./routers/emp_router'));
 app.use('/users', require('./routers/user_router'));
 app.use('/task', require('./routers/task_router'));

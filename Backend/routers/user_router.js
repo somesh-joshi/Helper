@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user_model.js');
+const bcrypt = require('bcrypt');
 
 //get all users
 router.get('/', (req, res) => {
@@ -24,14 +25,17 @@ router.get('/:id', (req, res) => {
     });
 });
 
+
 //add user
-router.post('/', (req, res) => {
+router.post('/add', async (req, res) => {
+    req.body.password = await bcrypt.hashSync(req.body.password, 10);
+    console.log(req.body);
     let newUser = new User(req.body);
     newUser.save((err, user) => {
         if(err) {
-            res.json(err);
+            res.send(err);
         } else {
-            res.json(user);
+            res.send(user);
         }
     });
 });
@@ -57,6 +61,21 @@ router.delete('/:id', (req, res) => {
         }
     });
 });
+
+// check login
+router.post('/login', async (req, res) => {
+    let user = await User.findOne({user_name: req.body.user_name});
+    if(user) {
+        if(await bcrypt.compareSync(req.body.password, user.password)) {
+            res.send(user); 
+        } else {
+            res.send({message: 'Invalid password'});
+        }
+    } else {
+        res.send({message: 'Invalid username'});
+    }
+});
+
 
 //export router
 module.exports = router;

@@ -8,18 +8,18 @@ const UserSchema = new Schema ({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     number: {
         type: Number,
         required: true,
-        max: 10
     },
     user_name: {
         type: String,
         required: true
     },
-    pass: {
+    password: {
         type: String,
         required: true    
     },

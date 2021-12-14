@@ -2,7 +2,6 @@ import React from "react";
 import '../App.css';
 import axios from 'axios';
 
-
 const SignUp = () => {
     
         return (
@@ -27,12 +26,13 @@ const SignUpForm = () => {
     });
 
     // post data to the server
-    const handleSubmit = (e) => {  
-        
+    const handleSubmit = async (e) => {  
         e.preventDefault();
-        // send data to the server
-        axios.post('http://localhost:5000/users/signup', data)
+        console.log(data);
+        // encrept password
+        axios.post('http://localhost:4000/users/add', data)
         .then(res => {
+            console.log(res);
             console.log(res.data);
         })
         .catch(err => {
@@ -40,13 +40,7 @@ const SignUpForm = () => {
         });
 
 
-        setData({
-            name: "",
-            number: 0,
-            email: "",
-            password: "",
-            user_name: "", 
-        });
+       // setData({name: "", number: 0, email: "", password: "", user_name: ""});
     };
 
 

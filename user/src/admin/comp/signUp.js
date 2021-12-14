@@ -1,5 +1,5 @@
 import React from "react";
-import '../App.css';
+import '../../App.css';
 import axios from 'axios';
 
 const SignUp = () => {
@@ -23,6 +23,9 @@ const SignUpForm = () => {
         number: 0,
         email: "",
         password: "",
+        user_name: "",
+        emp: true,
+        admin: true,
     });
 
     // post data to the server
@@ -40,7 +43,7 @@ const SignUpForm = () => {
         });
 
 
-       // setData({name: "", number: 0, email: "", password: "", user_name: ""});
+        setData({name: "", number: 0, email: "", password: "", user_name: ""});
     };
 
 

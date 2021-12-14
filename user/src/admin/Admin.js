@@ -3,7 +3,7 @@ import { Outlet, Link } from 'react-router-dom';
 import '../App.css';
 
 
-const User = () => {
+const Admin = () => {
     return (
         <>
         <div className="sub-nav">
@@ -17,14 +17,7 @@ const User = () => {
                 <p>
                     plz log in
                 </p>
-                <Link className="btn btn-primary" to="/user/signIn">Sign In</Link>
-              </div>
-              <div className="col-md-4">
-                <h1>Sign Up</h1>
-                <p>
-                    plz sign up
-                </p>
-                <Link className="btn btn-success" to="/user/signUp">Sign Up</Link>
+                <Link className="btn btn-primary" to="/admin/signIn">Sign In</Link>
               </div>
             </div>
           </div>
@@ -34,4 +27,4 @@ const User = () => {
 };
 
 
-export default User;
+export default Admin;

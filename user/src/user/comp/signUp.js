@@ -1,34 +1,37 @@
-import axios from "axios";
 import React from "react";
-import '../App.css';
+import '../../App.css';
+import axios from 'axios';
 
-const SignIn = () => {
+const SignUp = () => {
     
         return (
             <>
             <hr/>
             <div className="sub-nav">
-            <h1>Sign In</h1>
-            <SignInForm />
+            <h1>Sign Up</h1>
+            <SignUpForm/>
             </div>
             </>
         );
 };
 
-const SignInForm = () => {
+const SignUpForm = () => {
 
-
-    const [data, setData] = React.useState({    
-        user_name: "",
+    
+    const [data, setData] = React.useState({
+        name: "",
+        number: 0,
+        email: "",
         password: "",
+        user_name: "",
     });
 
     // post data to the server
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {  
         e.preventDefault();
         console.log(data);
-        
-        axios.post('http://localhost:4000/users/login', data)
+        // encrept password
+        axios.post('http://localhost:4000/users/add', data)
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -36,17 +39,27 @@ const SignInForm = () => {
         .catch(err => {
             console.log(err);
         });
-        setData({user_name: "", password: ""});
+
+
+        setData({name: "", number: 0, email: "", password: "", user_name: ""});
     };
+
 
     return (
         <>
-
-        <div className="sign-in-form">
+        <div className="sign-up-form">
         <form>
         <div className="form-group">
+        <label htmlFor="exampleInputEmail1">Full Name</label>
+        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full Name"  onChange={(e) => setData({...data, name:e.target.value})}/>
+        </div>
+        <div className="form-group">
+        <label htmlFor="exampleInputEmail1">Number</label>
+        <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Number" onChange={(e) => setData({...data, number: e.target.value})}/>
+        </div>
+        <div className="form-group">
         <label htmlFor="exampleInputEmail1">Email address</label>
-        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={(e) => setData({...data, user_name:e.target.value})}/>
+        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={(e) => setData({...data, email: e.target.value, user_name: e.target.value})}/>
         <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div className="form-group">
@@ -65,5 +78,4 @@ const SignInForm = () => {
 };
 
 
-
-export default SignIn;
+export default SignUp;

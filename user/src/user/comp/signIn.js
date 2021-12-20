@@ -1,23 +1,23 @@
 import axios from "axios";
 import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import '../../App.css';
 
-const SignIn = () => {
+const SignIn = (props) => {
     
         return (
             <>
-            <hr/>
             <div className="sub-nav">
             <h1>Sign In</h1>
-            <SignInForm />
+            <SignInForm setAuth={props.setAuth} />
             </div>
             </>
         );
 };
 
-const SignInForm = () => {
+const SignInForm = (props) => {
 
-
+    const navigate = useNavigate();
     const [data, setData] = React.useState({    
         user_name: "",
         password: "",
@@ -28,7 +28,8 @@ const SignInForm = () => {
         e.preventDefault();
         axios.post('http://localhost:4000/users/login', data)
         .then(res => {
-            alert(res.data.message);
+            props.setAuth(true);
+           navigate("/user/dashboard", {state: res.data});
         })
         .catch(err => {
             alert(err.message);
@@ -54,9 +55,11 @@ const SignInForm = () => {
         <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button><br />
+        Don't Have account <NavLink to='/user/signUp'>Sign Up</NavLink>
         </form>
         </div>
+        
         </>
     );
 };

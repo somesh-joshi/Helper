@@ -1,12 +1,12 @@
 import React from "react";
 import '../../App.css';
 import axios from 'axios';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     
         return (
             <>
-            <hr/>
             <div className="sub-nav">
             <h1>Sign Up</h1>
             <SignUpForm/>
@@ -17,7 +17,7 @@ const SignUp = () => {
 
 const SignUpForm = () => {
 
-    
+    const navigate = useNavigate();    
     const [data, setData] = React.useState({
         name: "",
         number: 0,
@@ -27,13 +27,14 @@ const SignUpForm = () => {
     });
 
     // post data to the server
-    const handleSubmit = async (e) => {  
+    const handleSubmit = (e) => {  
         e.preventDefault();
         console.log(data);
         // encrept password
-        axios.post('http://localhost:4000/users/ad', data)
+        axios.post('http://localhost:4000/users/add', data)
         .then(res => {
             alert(res.data.message);
+            navigate("/user/signIn");
         })
         .catch(err => {
             alert(err.message);
@@ -68,7 +69,8 @@ const SignUpForm = () => {
         <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button><br />
+        You have <NavLink to="/user/signin">Sign In</NavLink> if you have an account
         </form>
         </div>
         </>

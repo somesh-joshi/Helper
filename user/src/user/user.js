@@ -1,37 +1,28 @@
 import React from  'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import '../App.css';
+import SignIn from '../user/comp/signIn.js';
+import SignUp from '../user/comp/signUp.js';
+import Dashboard from '../user/comp/dashboard.js';
 
 
 const User = () => {
-    return (
-        <>
-        <div className="sub-nav">
-          <h1>User</h1>
-          <p> Make a choose </p>
-        </div>
-        <div className="contener">
-            <div className="row">
-              <div className="col-md-4">
-                <h1>Sign In</h1>
-                <p>
-                    plz log in
-                </p>
-                <Link className="btn btn-primary" to="/user/signIn">Sign In</Link>
-              </div>
-              <div className="col-md-4">
-                <h1>Sign Up</h1>
-                <p>
-                    plz sign up
-                </p>
-                <Link className="btn btn-success" to="/user/signUp">Sign Up</Link>
-              </div>
-            </div>
-          </div>
-          <Outlet/>
-        </>
-    );
+
+  const [auth, setAuth ] = React.useState(false);
+
+  return (
+    <>
+    <Routes>
+      <Route path="/" element={<Navigate replace to="/user/signIn"/>} />
+      <Route path="/signIn" element={<SignIn setAuth={setAuth}/>} />
+      <Route path="/signUp" element={<SignUp />} />
+      <Route path="/dashboard" element={auth ? <Dashboard /> : <Navigate replace to="/user/signIn"/>} />
+    </Routes>
+    </>
+  );
+  
 };
+
 
 
 

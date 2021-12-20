@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
     let user = await User.findOne({user_name: req.body.user_name});
     if(user) {
         if(await bcrypt.compareSync(req.body.password, user.password)) {
-            res.send({name: user.name, user_name: user.user_name, email: user.email, number: user.number,message: 'Login Successful'});
+            res.send({name: user.name, user_name: user.user_name, email: user.email, number: user.number});
         } else {
             res.send({message: 'Invalid password'});
         }

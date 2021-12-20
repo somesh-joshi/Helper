@@ -4,12 +4,6 @@ import './App.css';
 import User from "./user/User.js";
 import Employ from "./emp/Emp.js";
 import Admin from "./admin/Admin.js";
-import UserSignIn from './user/comp/signIn';
-import UserSignUp from './user/comp/signUp';
-import EmpSignIn from './emp/comp/signIn';
-import EmpSignUp from './emp/comp/signUp';
-import AdminSignIn from './admin/comp/signIn';
-
 
 
 function App() {
@@ -21,14 +15,9 @@ function App() {
     <hr />
     <Routes>
       <Route index element={<Home/>} />
-      
-      <Route path="/emp" element={<Employ/>} >
-          <Route path="/emp/signIn" element={<EmpSignIn/>} />
-          <Route path="/emp/signUp" element={<EmpSignUp/>} />
-      </Route>
-      <Route path="/admin" element={<Admin/>} >
-          <Route path="/admin/signIn" element={<AdminSignIn/>} />
-      </Route>
+      <Route path="user/*" element={<User/>} />
+      <Route path="emp/*" element={<Employ/>} />
+      <Route path="admin/*" element={<Admin/>} />
     </Routes>
     </>
   );

@@ -30,15 +30,12 @@ const SignUpForm = () => {
     // post data to the server
     const handleSubmit = async (e) => {  
         e.preventDefault();
-        console.log(data);
-        // encrept password
         axios.post('http://localhost:4000/users/add', data)
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            alert(res.data.message);
         })
         .catch(err => {
-            console.log(err);
+            alert(err.message);
         });
 
 

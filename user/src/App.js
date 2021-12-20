@@ -20,11 +20,8 @@ function App() {
     </div>
     <hr />
     <Routes>
-      <Route path="/" element={<Home/>} />
-      <Route path="/user" element={<User/>} >
-          <Route path="/user/signIn" element={<UserSignIn/>} />
-          <Route path="/user/signUp" element={<UserSignUp/>} />
-      </Route>
+      <Route index element={<Home/>} />
+      
       <Route path="/emp" element={<Employ/>} >
           <Route path="/emp/signIn" element={<EmpSignIn/>} />
           <Route path="/emp/signUp" element={<EmpSignUp/>} />

@@ -31,15 +31,13 @@ const SignUpForm = () => {
         e.preventDefault();
         console.log(data);
         // encrept password
-        axios.post('http://localhost:4000/users/add', data)
+        axios.post('http://localhost:4000/users/ad', data)
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            alert(res.data.message);
         })
         .catch(err => {
-            console.log(err);
+            alert(err.message);
         });
-
 
         setData({name: "", number: 0, email: "", password: "", user_name: ""});
     };

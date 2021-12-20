@@ -29,13 +29,12 @@ router.get('/:id', (req, res) => {
 //add user
 router.post('/add', async (req, res) => {
     req.body.password = await bcrypt.hashSync(req.body.password, 10);
-    console.log(req.body);
     let newUser = new User(req.body);
     newUser.save((err, user) => {
         if(err) {
-            res.send(err);
+            res.send({message: 'Error'});
         } else {
-            res.send(user);
+            res.send({message: 'User added successfully'});
         }
     });
 });
@@ -67,7 +66,7 @@ router.post('/login', async (req, res) => {
     let user = await User.findOne({user_name: req.body.user_name});
     if(user) {
         if(await bcrypt.compareSync(req.body.password, user.password)) {
-            res.send(user); 
+            res.send({name: user.name, user_name: user.user_name, email: user.email, number: user.number,message: 'Login Successful'});
         } else {
             res.send({message: 'Invalid password'});
         }

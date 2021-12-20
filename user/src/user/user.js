@@ -7,7 +7,7 @@ const User = () => {
     return (
         <>
         <div className="sub-nav">
-          <h1>Login</h1>
+          <h1>User</h1>
           <p> Make a choose </p>
         </div>
         <div className="contener">
@@ -32,6 +32,9 @@ const User = () => {
         </>
     );
 };
+
+
+
 
 
 export default User;

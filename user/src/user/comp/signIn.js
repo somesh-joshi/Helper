@@ -26,15 +26,12 @@ const SignInForm = () => {
     // post data to the server
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
-        
         axios.post('http://localhost:4000/users/login', data)
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            alert(res.data.message);
         })
         .catch(err => {
-            console.log(err);
+            alert(err.message);
         });
         setData({user_name: "", password: ""});
     };

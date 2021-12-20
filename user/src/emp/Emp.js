@@ -7,7 +7,7 @@ const Emp = () => {
     return (
         <>
         <div className="sub-nav">
-          <h1>Login</h1>
+          <h1>Emp</h1>
           <p> Make a choose </p>
         </div>
         <div className="contener">

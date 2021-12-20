@@ -13,7 +13,6 @@ const EmpSchema = new Schema({
     number: {
         type: Number,
         required: true,
-        max: 10
     },
     address: {
         type: String,
@@ -21,11 +20,11 @@ const EmpSchema = new Schema({
     },
     state: {
         type: Boolean,
-        required: true
+        default: true
     },
     available: {
         type: Boolean,
-        required: true
+        default: false
     },
     task_list: [{
             type: mongoose.Schema.Types.ObjectId,

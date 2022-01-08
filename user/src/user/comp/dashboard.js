@@ -1,7 +1,9 @@
 import React from "react";
-import { Route, Routes, Navigate, Link } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
+import axios from "axios";
 
 function Dashboard () {
+
 
     const handlesingout = () => {
         sessionStorage.removeItem("token");
@@ -31,14 +33,23 @@ function Dashboard () {
 
 function Newtaks () {
 
+    const [data, setData] = React.useState({
+        to: "",
+        from: "",
+        task: "",
+        note: "",
+        no_of: "",
+        address: "",
+    });
+
     return (
         <>
         <div className="sub-nav">
             <h1>New Taks</h1>
             <form>
                 <div className="form-group">
-                    <label >Tasks:</label>
-                    <select className="form-select" defaultValue={"Select"} >
+                    <label >Task:</label>
+                    <select className="form-select" defaultValue={"Select"} onChange={(e) => setData({...data,task: e.target.value})}>
                         <option value="Select">Select</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -60,8 +71,13 @@ function Newtaks () {
                 </div>
                 <br />
                 <div className="form-group">
+                    <label >Address:</label>
+                    <textarea className="form-control" rows="3" />
+                </div>
+                <br />
+                <div className="form-group">
                     <label >Note for us:</label>
-                    <textarea className="form-control" rows="5" defaultValue={""} />
+                    <textarea className="form-control" rows="2" defaultValue={""} />
                 </div>
                 <br />
                 <button type="submit" className="btn btn-primary">Submit</button>
@@ -75,6 +91,50 @@ function Newtaks () {
 
 
 function Profile() {
+
+    let token = sessionStorage.getItem("token");
+    token = JSON.parse(token);
+    const [data, setData] = React.useState({
+        name: "",
+        email: "",
+        address: "",
+        number: "",
+    });
+
+    React.useEffect(() => {
+        
+        axios.get('http://localhost:4000/users/'+token)
+        .then(res => {
+            setData({
+                name: res.data.name,
+                email: res.data.email,
+                address: res.data.address,
+                number: res.data.number,
+            });
+        })
+        
+    }, []);
+
+    const handlSubmit = (e) => {
+        e.preventDefault();
+        axios.put('http://localhost:4000/users/'+token, data)
+        .then(res => {
+            console.log(res.data);
+            // set 2 sec timeout
+            setTimeout(() => {
+                window.location.reload();
+            }
+            , 2000);
+        })
+        .catch(err => { 
+            console.log(err);
+            setTimeout(() => {
+                window.location.reload();
+            }
+            , 2000);
+        });
+    };
+
     return (
         <>
         <div className="sub-nav">
@@ -82,20 +142,25 @@ function Profile() {
             <form>
                 <div className="form-group">
                     <label >Name:</label>
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" defaultValue={data.name} onChange={(e) => {setData({...data,name: e.target.value})}}/>
                 </div>
                 <br />
                 <div className="form-group">
                     <label >Email:</label>
-                    <input type="email" className="form-control" />
+                    <input type="email" className="form-control" defaultValue={data.email} onChange={(e) => setData({...data,email: e.target.value})}/>
+                </div>
+                <br />
+                <div className="form-group">
+                    <label >Mobile No:</label>
+                    <input type="number" className="form-control" defaultValue={data.number} onChange={(e) => setData({...data,number: e.target.value})}/>
                 </div>
                 <br />
                 <div className="form-group">
                     <label >Address:</label>
-                    <textarea className="form-control" rows="5" />
+                    <textarea className="form-control" rows="5" defaultValue={data.address} onChange={(e) => setData({...data,address: e.target.value})}/>
                 </div>
                 <br />
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" onSubmit={handlSubmit}>Submit</button>
             </form>
         </div>
         </>
@@ -117,6 +182,7 @@ function Tasks() {
                         <th scope="col">From</th>
                         <th scope="col">To</th>
                         <th scope="col">status</th>
+                        <th scope="col">Edit/Cancle</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -127,11 +193,12 @@ function Tasks() {
                         <td>01/01/2020</td>
                         <td>01/01/2020</td>
                         <td>Done</td>
+                        <td><Link className='btn btn-primary' to="/user/dashboard/tasks/edit">Edit</Link></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        </>
+        </> 
     );
 };
 

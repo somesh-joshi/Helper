@@ -41,6 +41,7 @@ router.post('/add', async (req, res) => {
 
 //update user
 router.put('/:id', (req, res) => {
+    console.log(req.body);
     User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
         if(err) {
             res.json(err);

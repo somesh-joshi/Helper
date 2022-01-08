@@ -8,7 +8,9 @@ import Dashboard from '../user/comp/dashboard.js';
 
 const User = () => {
 
-  const [auth, setAuth ] = React.useState(false);
+  const [auth, setAuth ] = React.useState(() => {
+      return sessionStorage.getItem('token') ? true : false; 
+  });
 
   return (
     <>
@@ -16,7 +18,7 @@ const User = () => {
       <Route path="/" element={<Navigate replace to="/user/signIn"/>} />
       <Route path="/signIn" element={<SignIn setAuth={setAuth}/>} />
       <Route path="/signUp" element={<SignUp />} />
-      <Route path="/dashboard" element={auth ? <Dashboard /> : <Navigate replace to="/user/signIn"/>} />
+      <Route path="/dashboard/*" element={auth ? <Dashboard /> : <Navigate replace to="/user/signIn"/>} />
     </Routes>
     </>
   );

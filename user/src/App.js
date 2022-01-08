@@ -1,7 +1,7 @@
 import React from  'react';
 import { Routes, Route, Link} from 'react-router-dom';
 import './App.css';
-import User from "./user/User.js";
+import User from "./user/user.js";
 import Employ from "./emp/Emp.js";
 import Admin from "./admin/Admin.js";
 

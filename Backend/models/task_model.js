@@ -29,20 +29,26 @@ const TaskSchema = new Schema ({
     },
     cancle: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     done: {
         type: Boolean,  
-        required: true
+        required: true,
+        default: false
     },
     in_process: {
         type: Boolean,
-        required: true
+        required: true,
+        default: true
     },
     assined_emp: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Emp'
+    },
+    note: {
+        type: String,
     }
 });
 

@@ -28,8 +28,9 @@ const SignInForm = (props) => {
         e.preventDefault();
         axios.post('http://localhost:4000/users/login', data)
         .then(res => {
+            sessionStorage.setItem('token', JSON.stringify(res.data.user_id));
             props.setAuth(true);
-           navigate("/user/dashboard", {state: res.data});
+            navigate("/user/dashboard");
         })
         .catch(err => {
             alert(err.message);

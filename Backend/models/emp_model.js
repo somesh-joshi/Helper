@@ -14,7 +14,11 @@ const EmpSchema = new Schema({
         type: Number,
         required: true,
     },
-    address: {
+    user_name: {
+        type: String,
+        required: true
+    },
+    password: {
         type: String,
         required: true
     },

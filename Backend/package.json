@@ -15,7 +15,7 @@
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^6.0.15",
+    "mongoose": "^6.1.5",
     "nodemon": "^2.0.15"
   }
 }

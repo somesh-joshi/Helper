@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 });
 
 //add employee
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
     let newEmployee = new Employee(req.body);
     newEmployee.save((err, employee) => {
         if(err) {

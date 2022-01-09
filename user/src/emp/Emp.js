@@ -1,37 +1,33 @@
 import React from  'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import '../App.css';
+import SignIn from '../emp/comp/signIn.js';
+import SignUp from '../emp/comp/signUp.js';
+import Dashboard from '../emp/comp/dashboard.js';
 
 
-const Emp = () => {
-    return (
-        <>
-        <div className="sub-nav">
-          <h1>Emp</h1>
-          <p> Make a choose </p>
-        </div>
-        <div className="contener">
-            <div className="row">
-              <div className="col-md-4">
-                <h1>Sign In</h1>
-                <p>
-                    plz log in
-                </p>
-                <Link className="btn btn-primary" to="/emp/signIn">Sign In</Link>
-              </div>
-              <div className="col-md-4">
-                <h1>Sign Up</h1>
-                <p>
-                    plz sign up
-                </p>
-                <Link className="btn btn-success" to="/emp/signUp">Sign Up</Link>
-              </div>
-            </div>
-          </div>
-          <Outlet/>
-        </>
-    );
+const User = () => {
+
+  const [auth, setAuth ] = React.useState(() => {
+      return sessionStorage.getItem('token') ? true : false; 
+  });
+
+  return (
+    <>
+    <Routes>
+      <Route path="/" element={<Navigate replace to="/user/signIn"/>} />
+      <Route path="/signIn" element={<SignIn setAuth={setAuth}/>} />
+      <Route path="/signUp" element={<SignUp />} />
+      <Route path="/dashboard/*" element={auth ? <Dashboard /> : <Navigate replace to="/user/signIn"/>} />
+    </Routes>
+    </>
+  );
+  
 };
 
 
-export default Emp;
+
+
+
+
+export default User;

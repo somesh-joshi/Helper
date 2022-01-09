@@ -22,14 +22,6 @@ const UserSchema = new Schema ({
     password: {
         type: String,
         required: true    
-    },
-    emp: {
-        type: Boolean,
-        default: false
-    },
-    admin: {
-        type: Boolean,
-        default: false
     }
 });
 

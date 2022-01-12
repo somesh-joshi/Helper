@@ -26,11 +26,11 @@ const SignInForm = (props) => {
     // post data to the server
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:4000/users/login', data)
+        axios.post('http://localhost:4000/emp/login', data)
         .then(res => {
             sessionStorage.setItem('token', JSON.stringify(res.data.user_id));
             props.setAuth(true);
-            navigate("/user/dashboard");
+            navigate("/emp/dashboard");
         })
         .catch(err => {
             alert(err.message);
@@ -57,7 +57,7 @@ const SignInForm = (props) => {
         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button><br />
-        Don't Have account <NavLink to='/user/signUp'>Sign Up</NavLink>
+        Don't Have account <NavLink to='/emp/signUp'>Sign Up</NavLink>
         </form>
         </div>
         

@@ -31,10 +31,10 @@ const SignUpForm = () => {
         e.preventDefault();
         console.log(data);
         // encrept password
-        axios.post('http://localhost:4000/users/add', data)
+        axios.post('http://localhost:4000/emp/add', data)
         .then(res => {
             alert(res.data.message);
-            navigate("/user/signIn");
+            navigate("/emp/signIn");
         })
         .catch(err => {
             alert(err.message);
@@ -70,7 +70,7 @@ const SignUpForm = () => {
         <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button><br />
-        You have <NavLink to="/user/signin">Sign In</NavLink> if you have an account
+        You have <NavLink to="/emp/signin">Sign In</NavLink> if you have an account
         </form>
         </div>
         </>

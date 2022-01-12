@@ -15,10 +15,10 @@ const User = () => {
   return (
     <>
     <Routes>
-      <Route path="/" element={<Navigate replace to="/user/signIn"/>} />
+      <Route path="/" element={<Navigate replace to="/emp/signIn"/>} />
       <Route path="/signIn" element={<SignIn setAuth={setAuth}/>} />
       <Route path="/signUp" element={<SignUp />} />
-      <Route path="/dashboard/*" element={auth ? <Dashboard /> : <Navigate replace to="/user/signIn"/>} />
+      <Route path="/dashboard/*" element={auth ? <Dashboard /> : <Navigate replace to="/emp/signIn"/>} />
     </Routes>
     </>
   );

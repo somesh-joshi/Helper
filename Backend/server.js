@@ -23,7 +23,7 @@ var corsOptionsDelegate = function (req, callback) {
 
 app.use(cors(corsOptionsDelegate));
 app.use(bodyParser.json());
-app.use('/employees', require('./routers/emp_router'));
+app.use('/emp', require('./routers/emp_router'));
 app.use('/users', require('./routers/user_router'));
 app.use('/task', require('./routers/task_router'));
 
